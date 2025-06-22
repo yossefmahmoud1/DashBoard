@@ -16,7 +16,6 @@ import {
   CssBaseline,
   ThemeProvider,
   useMediaQuery,
-  useTheme,
 } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import Calendar from "./pages/calendar/calendar";

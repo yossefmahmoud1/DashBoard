@@ -19,6 +19,10 @@ const Form = ({ handleAddUser }) => {
     resetForm();
   };
 
+  const getGridColumn = (nonMobileValue = "span 4") => {
+    return isSmallScreen ? "span 2" : isNonMobile ? nonMobileValue : "span 2";
+  };
+
   return (
     <Box m={isSmallScreen ? "10px" : "20px"}>
       <Header title="CREATE USER" subtitle="Create a New User Profile" />
@@ -47,8 +51,7 @@ const Form = ({ handleAddUser }) => {
               }
               sx={{
                 "& > div": {
-                  gridColumn: isNonMobile ? undefined : "span 2",
-                  gridColumn: isSmallScreen ? "span 2" : undefined,
+                  gridColumn: getGridColumn(),
                 },
               }}
             >
@@ -63,10 +66,7 @@ const Form = ({ handleAddUser }) => {
                 name="firstName"
                 error={!!touched.firstName && !!errors.firstName}
                 helperText={touched.firstName && errors.firstName}
-                sx={{
-                  gridColumn: isNonMobile ? "span 2" : "span 2",
-                  gridColumn: isSmallScreen ? "span 2" : undefined,
-                }}
+                sx={{ gridColumn: getGridColumn("span 2") }}
               />
               <TextField
                 fullWidth
@@ -79,10 +79,7 @@ const Form = ({ handleAddUser }) => {
                 name="lastName"
                 error={!!touched.lastName && !!errors.lastName}
                 helperText={touched.lastName && errors.lastName}
-                sx={{
-                  gridColumn: isNonMobile ? "span 2" : "span 2",
-                  gridColumn: isSmallScreen ? "span 2" : undefined,
-                }}
+                sx={{ gridColumn: getGridColumn("span 2") }}
               />
               <TextField
                 fullWidth
@@ -95,10 +92,7 @@ const Form = ({ handleAddUser }) => {
                 name="age"
                 error={!!touched.age && !!errors.age}
                 helperText={touched.age && errors.age}
-                sx={{
-                  gridColumn: isNonMobile ? "span 4" : "span 2",
-                  gridColumn: isSmallScreen ? "span 2" : undefined,
-                }}
+                sx={{ gridColumn: getGridColumn() }}
               />
               <TextField
                 fullWidth
@@ -111,10 +105,7 @@ const Form = ({ handleAddUser }) => {
                 name="email"
                 error={!!touched.email && !!errors.email}
                 helperText={touched.email && errors.email}
-                sx={{
-                  gridColumn: isNonMobile ? "span 4" : "span 2",
-                  gridColumn: isSmallScreen ? "span 2" : undefined,
-                }}
+                sx={{ gridColumn: getGridColumn() }}
               />
               <TextField
                 fullWidth
@@ -127,10 +118,7 @@ const Form = ({ handleAddUser }) => {
                 name="contact"
                 error={!!touched.contact && !!errors.contact}
                 helperText={touched.contact && errors.contact}
-                sx={{
-                  gridColumn: isNonMobile ? "span 4" : "span 2",
-                  gridColumn: isSmallScreen ? "span 2" : undefined,
-                }}
+                sx={{ gridColumn: getGridColumn() }}
               />
               <TextField
                 select
@@ -143,10 +131,7 @@ const Form = ({ handleAddUser }) => {
                 name="accessLevel"
                 error={!!touched.accessLevel && !!errors.accessLevel}
                 helperText={touched.accessLevel && errors.accessLevel}
-                sx={{
-                  gridColumn: isNonMobile ? "span 4" : "span 2",
-                  gridColumn: isSmallScreen ? "span 2" : undefined,
-                }}
+                sx={{ gridColumn: getGridColumn() }}
               >
                 <MenuItem value="user">User</MenuItem>
                 <MenuItem value="manager">Manager</MenuItem>
@@ -182,6 +167,7 @@ const checkoutSchema = yup.object().shape({
     .oneOf(["user", "manager", "admin"])
     .required("required"),
 });
+
 const initialValues = {
   firstName: "",
   lastName: "",
